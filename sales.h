@@ -10,5 +10,6 @@ typedef struct {
 } point;
 
 void simple_find_tour(const point cities[], int tour[], int ncities);
+void faster_find_tour(const point cities[], int tour[], int ncities);
 
 #endif // SALES_H
