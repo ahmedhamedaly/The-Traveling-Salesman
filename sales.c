@@ -15,7 +15,7 @@ float sqr(float x)
 }
 
 float dist(const point cities[], int i, int j) {
-  return sqrt(sqr(cities[i].x-cities[j].x)+
+  return sqr(sqr(cities[i].x-cities[j].x)+
 	      sqr(cities[i].y-cities[j].y));
 }
 
