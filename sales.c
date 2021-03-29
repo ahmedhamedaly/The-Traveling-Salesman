@@ -137,7 +137,7 @@ int check_tour(const point *cities, int * tour, int ncities)
   int i;
   int result = 1;
 
-  simple_find_tour(cities,tour2,ncities);
+  faster_find_tour(cities,tour2,ncities);
 
   for ( i = 0; i < ncities; i++ ) {
     if ( tour[i] != tour2[i] ) {
