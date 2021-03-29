@@ -28,30 +28,33 @@ void faster_find_tour(const point cities[], int tour[], int ncities)
   float CloseDist;
   int endtour=0;
   #pragma omp parallel
+  {
+    #pragma omp for {
+      for (i=0; i<ncities; i++)
+        visited[i]=0;
+    }
   
-  #pragma omp for
-  for (i=0; i<ncities; i++)
-    visited[i]=0;
 
-
-  ThisPt = ncities-1;
-  visited[ncities-1] = 1;
-  tour[endtour++] = ncities-1;
-  
-  #pragma omp for
-  for (i=1; i<ncities; i++) {
-    CloseDist = DBL_MAX;
-    for (j=0; j<ncities-1; j++) {
-      if (!visited[j]) {
-        if (dist(cities, ThisPt, j) < CloseDist) {
-          CloseDist = dist(cities, ThisPt, j);
-          ClosePt = j;
+    ThisPt = ncities-1;
+    visited[ncities-1] = 1;
+    tour[endtour++] = ncities-1;
+    
+    #pragma omp for {
+      for (i=1; i<ncities; i++) {
+        CloseDist = DBL_MAX;
+        for (j=0; j<ncities-1; j++) {
+          if (!visited[j]) {
+            if (dist(cities, ThisPt, j) < CloseDist) {
+              CloseDist = dist(cities, ThisPt, j);
+              ClosePt = j;
+            }
+          }
         }
+        tour[endtour++] = ClosePt;
+        visited[ClosePt] = 1;
+        ThisPt = ClosePt;
       }
     }
-    tour[endtour++] = ClosePt;
-    visited[ClosePt] = 1;
-    ThisPt = ClosePt;
   }
 }
 
