@@ -6,7 +6,7 @@
 #include <sys/time.h>
 #include "sales.h"
 #include "mytour.h"
-#include "omp.h"
+#include <omp.h>
 
 const int DEBUG = 0;
 
