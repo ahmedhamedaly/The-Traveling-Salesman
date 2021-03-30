@@ -41,16 +41,15 @@ void faster_find_tour(const point cities[], int tour[], int ncities)
 #pragma omp for
     for (i = 1; i < ncities; i++)
     {
-      float local_CloseDist = DBL_MAX;
-      
+      //CloseDist, ClosePt
       CloseDist = DBL_MAX;
       for (j = 0; j < ncities - 1; j++)
       {
         if (!visited[j])
         {
-          if (dist(cities, ThisPt, j) < local_CloseDist)
+          if (dist(cities, ThisPt, j) < CloseDist)
           {
-            local_CloseDist = dist(cities, ThisPt, j);
+            CloseDist = dist(cities, ThisPt, j);
             ClosePt = j;
           }
         }
